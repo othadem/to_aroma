@@ -1,0 +1,1 @@
+Dialog dialog = new Dialog(context, R.style.FullHeightDialog);

@@ -1,0 +1,1 @@
+Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.image);
