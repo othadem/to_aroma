@@ -695,6 +695,7 @@ def get_completions3(query_record, candidate_records, top_n, threshold1, thresho
 
 
 def print_match_index(query_record, candidate_records):
+    print(f"print_match_index {query_record}  {candidate_records}")
     ret = -1
     i = 0
     for (candidate_record, score, pruned_record, pruned_score) in candidate_records:
@@ -849,34 +850,23 @@ def print_similar_and_completions(query_record, records, vectorizer, counter_mat
         config.THRESHOLD2,
     )
 
-    print(
-        f"################ query code ################ index = {query_record['index']}"
-    )
+    print(f"#### query code ### index = {query_record['index']}")
     print(ast_to_code(query_record["ast"]))
     if query_record["index"] >= 0:
-        print("---------------- extracted from ---------------")
+        print("---- extracted from ------")
         print(ast_to_code(records[query_record["index"]]["ast"]))
 
     for clustered_record in clustered_records:
-        print(
-            f"------------------- suggested code completion ------------------"
-        )  # idxs = ({clustered_record[1:]}), score = {candidate_records[clustered_record[1]][3]}")
-        print(
-            ast_to_code_with_full_lines(
-                clustered_record[0]["ast"], clustered_record[1]["ast"]
-            )
-        )
+        print(f"--- suggested code completion -----")
+        # idxs = ({clustered_record[1:]}), score = {candidate_records[clustered_record[1]][3]}")
+        print(ast_to_code_with_full_lines(clustered_record[0]["ast"], clustered_record[1]["ast"]))
 
     if config.PRINT_SIMILAR:
         j = 0
         for (candidate_record, score, pruned_record, pruned_score) in candidate_records:
-            print(
-                f"idx = {j}:------------------- similar code ------------------ index = {candidate_record['index']}, score = {score}"
-            )
+            print(f"idx = {j}:-- similar code ---- index = {candidate_record['index']}, score = {score}")
             print(ast_to_code(candidate_record["ast"]))
-            print(
-                f"------------------- similar code (pruned) ------------------ score = {pruned_score}"
-            )
+            print(f"---------- similar code (pruned) ------------ score = {pruned_score}")
             print(ast_to_code(pruned_record["ast"]))
             j += 1
     print("", flush=True)
@@ -1012,7 +1002,7 @@ def parse_args():
         "--file-query",
         action="append",
         dest="file_query",
-        default=['../../../data/query_file.json'],
+        default=['../../../../outputs/query_file.json'],
         help="File containing the query AST of a query code as JSON.",
         required=False
     )
@@ -1031,7 +1021,7 @@ def parse_args():
         type=int,
         action="store",
         dest="index_query",
-        default=7,
+        default=None,
         help="Index of the query AST in the corpus.",
         required=False
     )

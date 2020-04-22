@@ -6,7 +6,7 @@ mvn clean package
 mvn exec:java -Dexec.mainClass=ConvertJava -Dexec.args="compilationUnit ../outputs/jsrc/jsrc.json ../datasets/data_all/jsrc/"
 # convert query_file.java into ast in json format
 #time mvn exec:java -Dexec.mainClass=ConvertJava -Dexec.args="compilationUnit query_file.json query_file.java"
-mvn exec:java -Dexec.mainClass=ConvertJava -Dexec.args="compilationUnit query_file.json ./data/query_file.java"
+mvn exec:java -Dexec.mainClass=ConvertJava -Dexec.args="compilationUnit ../outputs/query_file.json ./data/query_file.java"
 
 # featurize asts
 time python3 src/main/python/similar.py -c ../../../jsrc.json -d ../../../tmpout
